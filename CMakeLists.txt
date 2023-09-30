@@ -16,7 +16,6 @@ set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are re
 
 ## List of options
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
-option(BUILD_DOCUMENTATION "Build the documentation." OFF)
 option(VOICEXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
 set(VOICEXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
 
@@ -29,12 +28,6 @@ include(CTest)
 
 ## Look for a pre-installed LAPACK
 find_package(LAPACK REQUIRED COMPONENTS CXX)
-
-## Look for a pre-installed paraconf
-find_package(paraconf REQUIRED COMPONENTS C)
-
-## Look for a pre-installed PDI
-find_package(PDI REQUIRED COMPONENTS C)
 
 ## Look for a pre-installed Doxygen
 find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
@@ -97,24 +90,8 @@ elseif("${VOICEXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
   find_package(mdspan "0.3" REQUIRED)
 endif()
 
-## if documentation is enabled, build it
-if("${BUILD_DOCUMENTATION}")
-        add_subdirectory(docs/)
-endif()
-
-## Turn off documentation for subpackages
-set(BUILD_DOCUMENTATION OFF)
-
 ## Use Kokkos from `vendor/`
 add_subdirectory("vendor/kokkos/" "kokkos")
-
-find_package (Eigen3 3.3 NO_MODULE)
-
-if (NOT EIGEN3_FOUND)
-  ## Use Eigen from `vendor/`
-  set(EIGEN_BUILD_DOC OFF CACHE BOOL "Don't build eigen docs")
-  add_subdirectory("vendor/eigen/" "eigen")
-endif (NOT EIGEN3_FOUND)
 
 ## Use the discrete domain computation library (ddc) from `vendor/`
 add_subdirectory("vendor/ddc/" "ddc")
@@ -128,15 +105,5 @@ add_subdirectory("vendor/sll/" "sll")
 ## Change the C++ flags to the voice specific ones
 set(CMAKE_CXX_FLAGS "${VOICEXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
-set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx)
-
 ## Get the main code in `src/`
 add_subdirectory(src/)
-
-## Build the simulations (applications mains) in `simulations/`
-add_subdirectory(simulations/)
-
-## if tests are enabled, build the tests in `tests/`
-if("${BUILD_TESTING}")
-    add_subdirectory(tests/)
-endif()

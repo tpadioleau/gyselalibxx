@@ -21,8 +21,6 @@
                 ddc::Coordinate<DimY>(0.4)                                                         \
     }
 
-namespace {
-
 struct DimX;
 struct DimY;
 
@@ -42,8 +40,6 @@ ddc::Coordinate<DimY> constexpr point_ry(0.2);
 
 ddc::DiscreteElement<DDimX, DDimY> constexpr point_ixy(2, 1);
 ddc::Coordinate<DimX, DimY> constexpr point_rxy(0.3, 0.2);
-
-} // namespace
 
 TEST(NonUniformPointSamplingTest, ListConstructor)
 {

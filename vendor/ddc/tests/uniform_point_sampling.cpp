@@ -8,8 +8,6 @@
 
 #include <Kokkos_Core.hpp>
 
-namespace {
-
 struct DimX;
 struct DimY;
 
@@ -20,8 +18,6 @@ static ddc::Coordinate<DimX> constexpr origin(-1.);
 static ddc::Real constexpr step = 0.5;
 static ddc::DiscreteElement<DDimX> constexpr point_ix(2);
 static ddc::Coordinate<DimX> constexpr point_rx(0.);
-
-} // namespace
 
 TEST(UniformPointSamplingTest, Constructor)
 {

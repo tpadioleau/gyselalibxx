@@ -6,18 +6,14 @@
 #include <sll/spline_builder.hpp>
 #include <sll/spline_evaluator.hpp>
 
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
-
-#include <paraconf.h>
-#include <pdi.h>
-
 #include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "species_info.hpp"
 
-TEST(FemPeriodicPoissonSolver, CosineSource)
+int main()
 {
+    ddc::ScopeGuard guard;
+
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
     IVectX const x_size(100);
@@ -102,6 +98,6 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
         double const exact_field = sin(ddc::coordinate(ix));
         error_field = fmax(fabs(electric_field(ix) - exact_field), error_field);
     }
-    EXPECT_LE(error_pot, 1e-8);
-    EXPECT_LE(error_field, 1e-6);
+    assert(error_pot <= 1e-8);
+    assert(error_field <= 1e-6);
 }
