@@ -18,7 +18,6 @@ add_executable(ddc_tests
     for_each.cpp
     fill.cpp
     discrete_element.cpp
-	fft.cpp
     discrete_vector.cpp
 )
 target_compile_features(ddc_tests PUBLIC cxx_std_17)

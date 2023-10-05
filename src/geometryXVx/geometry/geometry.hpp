@@ -3,7 +3,6 @@
 #pragma once
 
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/fft.hpp> // Strange but needed to get access to Fourier tag, to be clarified
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
@@ -282,13 +281,6 @@ using DViewSpVx = ViewSpVx<double>;
 using DViewSpXVx = ViewSpXVx<double>;
 
 using DBSViewX = BSViewX<double>;
-
-using RDimFx = ddc::Fourier<RDimX>;
-using CoordFx = ddc::Coordinate<RDimFx>;
-using IDimFx = ddc::PeriodicSampling<RDimFx>;
-using IndexFx = ddc::DiscreteElement<IDimFx>;
-using IVectFx = ddc::DiscreteVector<IDimFx>;
-using IDomainFx = ddc::DiscreteDomain<IDimFx>;
 
 class GeometryXVx
 {
